@@ -5,7 +5,12 @@ class Map
   end
 
   def assign(key, value)
-    @map << [key, value] if key_new?(key)
+    if key_new?(key)
+      @map << [key, value]
+    else
+      idx = lookup(key)
+      @map[idx][1] = value
+    end
   end
 
   def key_new?(key)
@@ -18,11 +23,16 @@ class Map
   end
 
   def lookup(key)
+    @map.each_with_index do |pair, index|
+      return index if pair[0] == key
+    end
 
+    nil
   end
 
   def remove(key)
-
+    idx = lookup(key)
+    @map.delete_at(idx)
   end
 
   def show
