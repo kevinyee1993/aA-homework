@@ -1,0 +1,29 @@
+<!-- If a user exists aka it has persisted, you know you wanna
+do all the update stuff to it, otherwise it doesn't exist and
+that means you want to do all the create stuff on it
+
+setting vars action, method, and message to be used throughout the code
+instead of doing all the ternary logic
+ -->
+
+<% action = (user.persisted? ? user_url(user) : users_url)  %>
+<% method = (user.persisted? ? "patch" : "post") %>
+<% message = (user.persisted? ? "Update user" : "Create user") %>
+
+<form action="<%= action %>" method="post">
+  <input type="hidden" name="_method" value="<% method %>">
+
+  <input type="hidden" name="authenticity_token" value=" <%=form_authenticity_token%> ">
+
+  <label for="user_username"> Username </label>
+  <input id="user_username" type="text" name="user[username]">
+
+  <br>
+
+  <label for="user_password"> Password </label>
+    <input id="user_password" type="password" name="user[password]">
+
+  <br>
+
+  <input type="submit" value="<%= message %>">
+</form>
