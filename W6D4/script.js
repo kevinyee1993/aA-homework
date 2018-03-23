@@ -1,14 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // toggling restaurants
 
-  const toggleLi = (e) => {
+  function toggleLi(e) {
     const li = e.target;
-    if (li.className === "visited") {
+
+    if(li.className === 'visited') {
       li.className = "";
     } else {
-      li.className = "visited";
+      li.className = 'visited';
     }
-  };
+  }
 
   document.querySelectorAll("#restaurants li").forEach((li) => {
     li.addEventListener("click", toggleLi);
@@ -19,29 +19,44 @@ document.addEventListener("DOMContentLoaded", () => {
   // adding SF places as list items
 
   // --- your code here!
+function handleFavoriteSubmit(e) {
+  //preventDefault prevents you from bubbling up or something? forgot
+  e.preventDefault();
+  const favoriteInput = document.querySelector(".favorite-input");
+  const newPlace = favoriteInput.value;
 
-  const favoriteSubmit = (e) => {
-    e.preventDefault();
-    const selectInput = document.querySelector(".favorite-input");
-    const favorite = selectInput.value;
-    selectInput.value = "";
+  //reset the input box value to nothing
+  favoriteInput.value = "";
 
-    const li = document.createElement("li");
-    li.textContent = favorite;
+  //document.createElement("HTML tag") does exactly what the heck you think
+  const newListLi = document.createElement("li");
 
-    const favorites = document.getElementById("sf-places");
-    favorites.appendChild(li);
-  };
+  //taking the new li you made and makes the text equal to the value you just
+  //got from the input box
+  newListLi.textContent = newPlace;
 
-  const listSubmitButton = document.querySelector(".favorite-submit");
-  listSubmitButton.addEventListener("click", favoriteSubmit);
+  const favoritesList = document.getElementById("sf-places");
+  favoritesList.appendChild(newListLi);
+}
+
+//finds the button that adds the thing to the thing
+const listSubmitButton = document.querySelector(".favorite-submit");
+
+//adds an event listener to this button you found and whenever you click it,
+//it executes the second param which is the function you want to run
+listSubmitButton.addEventListener("click", handleFavoriteSubmit);
 
 
 
   // adding new photos
 
   // --- your code here!
+function showPhotoForm(e) {
+  //want to remove hidden class after you click the button
+  const photoFormDiv = document.querySelector(".photo-form-container");
 
+
+}
 
 
 });
